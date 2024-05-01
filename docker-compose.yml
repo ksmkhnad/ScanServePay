@@ -1,0 +1,18 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:5000"
+    volumes:
+      - .:/app
+    environment:
+      - DATABASE_URL=postgres://dbuser:dbpassword@db:5432/qr_menu_payment_db
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpassword
+      POSTGRES_DB: qr_menu_payment_db
